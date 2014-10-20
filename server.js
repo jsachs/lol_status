@@ -4,8 +4,8 @@
 var express  = require('express');
 var app      = express(); 								    // create our app w/ express
 var mongoose = require('mongoose'); 					// mongoose for mongodb
-var port  	 = process.env.PORT || 1234; 			// set the port
-var database = require('./config/database');  // load the database config
+var port  	 = Number(process.env.PORT || 5000); 			// set the port
+var database = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/lol_status';;  // load the database config
 var crypto = require('crypto');
 var cron     = require('cron');
 var morgan = require('morgan'); 		              // log requests to the console (express4)
@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 });
 
 // configuration =================
-mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
+mongoose.connect(database); 	// connect to mongoDB database on modulus.io
 
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
 app.use(morgan('dev')); 										            // log every request to the console
@@ -62,8 +62,9 @@ app.get('*', function(req, res) {
 });
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port " + port);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
 
 
 // variables for regions and current game state
