@@ -1,18 +1,18 @@
 // server.js
 
+
 // set up ========================
 var express  = require('express');
 var app      = express(); 								    // create our app w/ express
-var mongoose = require('mongoose'); 					// mongoose for mongodb
+var mongoose = require('mongoose'); 					    // mongoose for mongodb
 var port  	 = Number(process.env.PORT || 5000); 			// set the port
-var database = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/lol_status';;  // load the database config
-var crypto = require('crypto');
+var crypto   = require('crypto');
 var cron     = require('cron');
-var morgan = require('morgan'); 		              // log requests to the console (express4)
-var bodyParser = require('body-parser');          // pull information from HTML POST (express4)
-var methodOverride = require('method-override');  // simulate DELETE and PUT (express4)
+var morgan   = require('morgan'); 		              // log requests to the console (express4)
+var bodyParser = require('body-parser');              // pull information from HTML POST (express4)
+var methodOverride = require('method-override');      // simulate DELETE and PUT (express4)
 
-var Client = require('node-rest-client').Client;  // node REST API client
+var Client = require('node-rest-client').Client;      // node REST API client
 client = new Client();
 
 var nodemailer = require('nodemailer');
@@ -20,12 +20,14 @@ var transporter = nodemailer.createTransport({
    service: "Gmail",
    auth: {
        user: "jacob.s.sachs@gmail.com",
-       pass: "Do I dare disturb the universe?"
+       pass: "withouttheherothereisnoEvent"
    }
 });
 
+
 // configuration =================
-mongoose.connect(database); 	// connect to mongoDB database on modulus.io
+var database = require('./config/database');
+mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
 app.use(morgan('dev')); 										            // log every request to the console
@@ -34,38 +36,18 @@ app.use(bodyParser.json()); 									                  // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-// models ======================================================================
-var userSchema = mongoose.Schema({
-		email: {type: String, unique: true},
-		region: {type: String, required: true}
-});
-
-var User = mongoose.model('User', userSchema);
-
 
 // routes ======================================================================
+require('./app/routes')(app);
 
-// API ---------------------------------------------------------------------
-app.post('/signup', function(req, res) {
-	User.create({
-		email : req.body.inputEmail,
-		region : req.body.inputRegion.name,
-	}, function(err) {
-		if (err) console.log(err);
-	});
-	console.log(req.body);
-});
-
-// application -------------------------------------------------------------
-app.get('*', function(req, res) {
-	//res.sendfile('./public/index2.html'); // load the single view file (angular will handle the page changes on the front-end)
-});
 
 // listen (start app with node server.js) ======================================
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
+
+// server logic ================================================================
 
 // variables for regions and current game state
 var currentState = {};
