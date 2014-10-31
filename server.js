@@ -82,7 +82,7 @@ function sendEmailAlert(reg, newState){
 		console.log("Emailing users: " + docs);
 		docs.forEach(function(user) {
 			transporter.sendMail({
-				from: "jacob.s.sachs@gmail.com", // sender address
+				from: process.env.EMAIL_USER, // sender address
 				to: user.email, // comma separated list of receivers
 				subject: user.region + " alert", // Subject line
 				text: "The game server for " + user.region + " is now " + newState // plaintext body
