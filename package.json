@@ -12,6 +12,13 @@
     "method-override": "~2.1.2",
     "nodemailer": "~1.0.0",
     "cron": "~1.0.0",
-    "node-rest-client": "~1.0.0"
+    "node-rest-client": "~1.0.0",
+    "email-templates": "~1.1.2",
+    "mocha": "~2.0.0",
+    "should": "~4.0.0"
+  },
+  "repository"   : {
+    "type": "git",
+    "url" : "https://github.com/jsachs/lol_status.git"
   }
 }

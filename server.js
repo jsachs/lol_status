@@ -15,19 +15,12 @@ var methodOverride = require('method-override');      // simulate DELETE and PUT
 var Client = require('node-rest-client').Client;      // node REST API client
 client = new Client();
 
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-   service: "Gmail",
-   auth: {
-       user: process.env.EMAIL_USER,
-       pass: process.env.EMAIL_PASSWORD
-   }
-});
-
 
 // configuration =================
-var database = require('./config/database');
-mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
+var database = require('./config');
+mongoose.connect(database.db.url); 	// connect to mongoDB database on modulus.io
+
+var mailer = require('./app/models/mailer')  // get the nodemailer wrapper model
 
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
 app.use(morgan('dev')); 										            // log every request to the console
@@ -76,23 +69,22 @@ var cronJob = cron.job("*/30 * * * * *", function(){
 // run the cron job
 cronJob.start();
 
+
 // send alert emails if there is a status change
 function sendEmailAlert(reg, newState){
 	User.find({ region: reg }, function(err, docs) {
 		console.log("Emailing users: " + docs);
 		docs.forEach(function(user) {
-			transporter.sendMail({
-				from: process.env.EMAIL_USER, // sender address
-				to: user.email, // comma separated list of receivers
-				subject: user.region + " alert", // Subject line
-				text: "The game server for " + user.region + " is now " + newState // plaintext body
-			}, function(error, response){
-				if(error){
-					console.log(error);
-				}else{
-					console.log("Message sent: " + response.message);
-				}
-			});
+      var locals = {
+        email: user.email,
+        subject: user.region + " alert",
+        region: user.region,
+        status: newState
+        unsubscribeUrl: 'lorem ipsum'
+      };
+      mailer.sendOne('alert', locals, function(error) {
+        console.log(error);
+      });
 		});
 	});
 };
