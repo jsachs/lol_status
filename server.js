@@ -79,7 +79,7 @@ function sendEmailAlert(reg, newState){
         email: user.email,
         subject: user.region + " is " + newState,
         region: user.region,
-        status: newState
+        status: newState,
         unsubscribeUrl: 'lorem ipsum'
       };
       mailer.sendOne('alert', locals, function(error) {
