@@ -1,4 +1,4 @@
-# RequireJS Marionette Boilerplate
+# League of Legends Server Status
 
 This is a simple webapp to monitor server status for League of Legends.
 You can view the status of game server, the store, and forums.
