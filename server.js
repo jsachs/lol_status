@@ -77,7 +77,7 @@ function sendEmailAlert(reg, newState){
 		docs.forEach(function(user) {
       var locals = {
         email: user.email,
-        subject: user.region + " alert",
+        subject: user.region + " is " + newState,
         region: user.region,
         status: newState
         unsubscribeUrl: 'lorem ipsum'
