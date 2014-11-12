@@ -4,7 +4,6 @@ node_js:
 notifications:
   email: false
 before_script:
-  - npm install -g istanbul
-  - npm install -g mocha
+  - npm install
 after_script:
   - istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
