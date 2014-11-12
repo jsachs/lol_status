@@ -17,7 +17,7 @@ describe('models: mailer', function () {
      };
      mailer.sendOne('alert', locals, function (err, responseStatus, html, text) {
        should.not.exist(err);
-       responseStatus.should.include("OK");
+       responseStatus.should.containEql("OK");
        done();
      });
    });
