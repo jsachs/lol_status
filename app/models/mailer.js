@@ -36,13 +36,17 @@ exports.sendOne = function (templateName, locals, fn) {
        console.log(err);
        return fn(err);
      }
+     // if we are testing don't send out an email instead return
+     // success and the html and txt strings for inspection
+     if (process.env.NODE_ENV === 'test') {
+       return fn(null, '250 2.0.0 OK 1350452502 s5sm19782310obo.10', html, text);
+     }
      var transport = defaultTransport;
      transport.sendMail({
        from: config.mailer.defaultFromAddress,
        to: locals.email,
        subject: locals.subject,
        html: html,
-       // generateTextFromHTML: true,
        text: text
      }, function (err, responseStatus) {
        if (err) {
