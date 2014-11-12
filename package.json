@@ -19,14 +19,13 @@
   "devDependencies": {
     "mocha": ">= 2.0.0",
     "should": ">= 4.0.0",
-    "coveralls": "*",
-    "mocha-lcov-reporter": "*"
+    "coveralls": "*"
   },
   "repository"   : {
     "type": "git",
     "url" : "https://github.com/jsachs/lol_status.git"
   },
   "scripts": {
-   "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
+   "test": "node_modules/.bin/mocha"
   }
 }
