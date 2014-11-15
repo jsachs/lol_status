@@ -1,7 +1,7 @@
 {
   "name"         : "lol_status",
-  "version"      : "0.0.2",
-  "description"  : "League of Legends server status dashboard.",
+  "version"      : "0.0.3",
+  "description"  : "League of Legends server status dashboard",
   "main"         : "server.js",
   "author"       : "Jacob Sachs",
   "dependencies" : {
@@ -19,7 +19,8 @@
   "devDependencies": {
     "mocha": ">= 2.0.0",
     "should": ">= 4.0.0",
-    "coveralls": "*"
+    "coveralls": "*",
+    "superagent": "*"
   },
   "repository"   : {
     "type": "git",
