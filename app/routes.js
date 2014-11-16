@@ -1,23 +1,39 @@
 var User = require('./models/user')
 
 module.exports = function(app) {
-  
+
   // API ---------------------------------------------------------------------
   app.post('/signup', function(req, res) {
-      User.create({
-          email : req.body.inputEmail,
-          region : req.body.inputRegion.name,
-      }, function(err) {
-          if (err) console.log(err);
-      });
-      console.log(req.body);
+    User.create({
+      email : req.body.inputEmail,
+      region : req.body.inputRegion.name,
+    }, function(err, user) {
+      if (err) {
+        console.log(err);
+        return err;
+      }
+      console.log('signing up user: ' + user);
+      res.send(user);
+    });
+  });
+
+  app.delete('/unsubscribe/:user_id', function(req, res) {  // TODO send an email on unsubscribe
+    User.remove({
+      _id : req.params.user_id
+    }, function(err, result) {
+      if (err) {
+        console.log(err);
+        return err;
+      }
+      res.send((result===1)?{msg:'success'}:{msg:'error'})
+    });
   });
 
   // application -------------------------------------------------------------
   app.get('*', function(req, res) {
-      //res.sendfile('./public/index2.html'); // load the single view file (angular will handle the page changes on the front-end)
+    res.sendfile('../public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
   });
-  
-  
-  
+
+
+
 };

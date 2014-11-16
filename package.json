@@ -20,7 +20,7 @@
     "mocha": ">= 2.0.0",
     "should": ">= 4.0.0",
     "coveralls": "*",
-    "superagent": "*"
+    "supertest": "*"
   },
   "repository"   : {
     "type": "git",
