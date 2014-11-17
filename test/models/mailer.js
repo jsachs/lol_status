@@ -5,9 +5,9 @@ var mailer = require('../../app/models/mailer');
 
 describe('models: mailer', function () {
 
- describe('sendOne()', function (done) {
+ describe('sendOne()', function () {
 
-   it('should render the alert templates correctly', function (done) {
+   it('should render the alert template correctly', function (done) {
      var locals = {
        email: 'jacob.s.sachs@gmail.com',
        subject: "NA is online",
@@ -17,7 +17,9 @@ describe('models: mailer', function () {
      };
      mailer.sendOne('alert', locals, function (err, responseStatus, html, text) {
        should.not.exist(err);
-       responseStatus.should.containEql("OK");
+       responseStatus.should.containEql("OK");  // TODO validate each template
+       text.should.containEql('na');
+       html.should.containEql('lorem ipsum');
        done();
      });
    });
