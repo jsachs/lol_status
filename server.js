@@ -19,14 +19,17 @@ client = new Client();
 var database = require('./config');
 mongoose.connect(database.db.url);
 
-var mailer = require('./app/models/mailer')  // get the nodemailer wrapper model
-
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
 app.use(morgan('dev')); 										            // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'})); 			      // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); 									                  // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
+
+
+// models ======================================================================
+var mailer = require('./app/models/mailer')  // get the nodemailer wrapper model
+var Status = require('./app/models/status')
 
 
 // routes ======================================================================
@@ -41,26 +44,23 @@ app.listen(port, function() {
 
 // server logic ================================================================
 
-// variables for regions and current game state
-var currentState = {};
-var regions = ['na','euw','eune','lan','las','br','tr','ru','oce'];
 
 // cron job to check server status
 var cronJob = cron.job("*/30 * * * * *", function(){
-
-  var newState = {};
+  var regions = ['na','euw','eune','lan','las','br','tr','ru','oce'];
+  var newStatus;
 
   // get each region's game status
   regions.forEach(function(region) {
     client.get("http://status.leagueoflegends.com/shards/" + region, function(data, response){
-      newState[region] = data.services[1].status
-      // send an email if the status has changed
-      if (currentState[region]) {
-        if (newState[region] != currentState[region]) {
-          sendEmailAlert(region, newState[region]);
-        };
-      };
-      currentState[region] = newState[region];
+      newStatus = data.services[1].status
+      // check the game status:
+      // if the game status has changed:
+      //  - update the status (done in Model method)
+      //  - send an email alert
+      if (Status.statusChange(region, newStatus)) {
+        sendEmailAlert(region, newStatus);
+      }
     });
   });
 
