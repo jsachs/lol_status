@@ -5,7 +5,7 @@ var mailer = require('../../app/models/mailer');
 
 describe('models: mailer', function () {
 
- describe('sendOne()', function () {
+ describe('sendOne', function () {
 
    it('should render the alert template correctly', function (done) {
      var locals = {
