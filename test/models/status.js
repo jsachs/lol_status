@@ -17,8 +17,9 @@ describe('models: status', function() {
   });
 
   beforeEach(function(done) {
-    Status.remove({}, function(){
-      done();
+    Status.remove({}, function() {
+      Status.statusChange('na', 'online');
+      setTimeout(function(){done()}, 500);
     });
   });
 
@@ -31,15 +32,16 @@ describe('models: status', function() {
   describe('statusChange', function() {
 
     it('loads a Status model for each region when initialized', function(done) {
-      done();
+      Status.findOne({region: 'na'}, function(err, doc) {
+        should.exist(doc);
+        done();
+      });
     });
 
-    it('returns true when there is a game status change', function(done) {
-      done();
-    });
-
-    it('returns false when there is no game status change', function(done) {
-      done();
+    it('executes a callback when there is a game status change', function(done) {
+      Status.statusChange('na', 'offline', function() {
+        done();
+      });
     });
 
   });

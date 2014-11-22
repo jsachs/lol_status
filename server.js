@@ -58,9 +58,7 @@ var cronJob = cron.job("*/30 * * * * *", function(){
       // if the game status has changed:
       //  - update the status (done in Model method)
       //  - send an email alert
-      if (Status.statusChange(region, newStatus)) {
-        sendEmailAlert(region, newStatus);
-      }
+      Status.statusChange(region, newStatus, sendEmailAlert);
     });
   });
 
