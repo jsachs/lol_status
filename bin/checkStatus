@@ -9,14 +9,14 @@ client = new Client();
 
 
 // configuration ===============================================================
-var database = require('./config');
+var database = require('../config');
 mongoose.connect(database.db.url);
 
 
 // models ======================================================================
-var mailer = require('./app/models/mailer');
-var Status = require('./app/models/status');
-var User   = require('./app/models/user');
+var mailer = require('../app/models/mailer');
+var Status = require('../app/models/status');
+var User   = require('../app/models/user');
 
 
 // heroku scheduled task =======================================================
