@@ -34,7 +34,6 @@ regions.forEach(function(region) {
     Status.statusChange(region, newStatus, sendEmailAlert);
   });
 });
-exit();
 
 // send alert emails if there is a status change
 function sendEmailAlert(reg, newState){
