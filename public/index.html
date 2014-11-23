@@ -9,18 +9,10 @@
 
 	<title>LoL Server Status</title>
 
-	<!-- SCROLLS -->
+	<!-- STYLES -->
 	<link rel="stylesheet" href="bootstrap.min.css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+	<link rel="stylesheet" href="index.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><!-- load font awesome -->
-	<style>
-		.fa-check { color: green;
-		 						font-size: 18px; }
-		.fa-exclamation-circle { color: red;
-		                         font-size: 18px; }
-		p { margin-top: 0em;
-  		  margin-bottom: 0em; }
-	</style>
 
 	<!-- SCRIPTS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
@@ -73,15 +65,21 @@
 				</div>
 				<div id="{{shard.slug}}" class="panel-collapse collapse">
 					<div class="panel-body">
-					<p><i ng-class="regions[shard.slug].services.1.status == 'online' ? 'fa fa-check' : 'fa fa-exclamation-circle'"></i> Game</p>
-					<p><i ng-class="regions[shard.slug].services.0.status == 'online' ? 'fa fa-check' : 'fa fa-exclamation-circle'"></i> Forums</p>
-					<p><i ng-class="regions[shard.slug].services.2.status == 'online' ? 'fa fa-check' : 'fa fa-exclamation-circle'"></i> Store</p>
+					<p><i ng-class="regions[shard.slug].services.1.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Game</p>
+					<p><i ng-class="regions[shard.slug].services.0.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Forums</p>
+					<p><i ng-class="regions[shard.slug].services.2.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Store</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
+
+	<div id="footer">
+		<div class="container">
+			<p>© Jacob Sachs | Licensed under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a><p>
+			<p>LoL Status isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</p>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -1,4 +1,6 @@
-var User = require('./models/user')
+var User = require('./models/user');
+var path = require('path');
+var index = path.resolve(__dirname, '..', 'public/index.html');
 
 module.exports = function(app) {
 
@@ -31,7 +33,7 @@ module.exports = function(app) {
 
   // application -------------------------------------------------------------
   app.get('*', function(req, res) {
-    res.sendfile('../public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+    res.sendfile(index); // load the single view file (angular will handle the page changes on the front-end)
   });
 
 
