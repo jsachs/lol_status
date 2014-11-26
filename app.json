@@ -1,0 +1,20 @@
+{
+  "name": "lol_status",
+  "description": "League of Legends server status dashboard",
+  "repository": "https://github.com/jsachs/lol_status",
+  "env": {
+    "MONGOLAB_URI": {
+      "description": "MongoDB URI for use with the MongoLab add-on"
+    },
+    "EMAIL_PASSWORD": {
+      "description": "Password for sending email alerts (currently Gmail)"
+    },
+    "EMAIL_USER": {
+      "description": "User for sending email alerts (currently Gmail)"
+    }
+  },
+  "addons": [
+    "scheduler:standard",
+    "mongolab:sandbox"
+  ]
+}

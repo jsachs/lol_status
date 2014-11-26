@@ -1,16 +1,23 @@
 language: node_js
 services: mongodb
 node_js:
-  - "0.10"
+- '0.10'
 notifications:
   email: false
 before_script:
-  - npm install -g istanbul
-  - npm install -g mocha
-  - npm install -g supertest
-  - node server.js &
-  - sleep 5
+- npm install -g istanbul
+- npm install -g mocha
+- npm install -g supertest
+- node server.js &
+- sleep 5
 script:
-  - NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec
+- NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+deploy:
+  provider: heroku
+  api_key:
+    secure: L66ktDw8bbK8HnPqPpe0IzYlOvzZk3bUTHng20VUNoAfwzwTarRfzKAcRyAJLpWExYjzJ2aiw5aGodyyPO7nEkoZ+IUZLivuLpmm+IV23SIwj6Gv7+kwxsPr60QI5JXQSsXXxJLePfgat0pz06TNUUEru4m9G/esSUOvQWKXr7o=
+  app: vast-escarpment-2018
+  on:
+    repo: jsachs/lol_status
