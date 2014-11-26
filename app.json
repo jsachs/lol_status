@@ -10,7 +10,7 @@
       "description": "Password for sending email alerts (currently Gmail)"
     },
     "EMAIL_USER": {
-      "description:": "User for sending email alerts (currently Gmail)"
+      "description": "User for sending email alerts (currently Gmail)"
     }
   },
   "addons": [
