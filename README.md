@@ -9,3 +9,5 @@ You can view the status of game server, the store, and forums.
 If you subscribe to email alerts, a cron job running every 30 seconds checks
 the current status of the game servers. Any change in status sends an
 email to all subscribers.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
