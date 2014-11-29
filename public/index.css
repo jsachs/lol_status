@@ -2,12 +2,22 @@
 /* Status box styles
 -------------------------------------------------- */
 
-.fa-check { color: green;
-            font-size: 18px; }
-.fa-exclamation-circle { color: red;
-                         font-size: 18px; }
-p { margin-top: 0em;
-    margin-bottom: 0em; }
+.fa-check {
+  color: green;
+  /*font-size: 18px;*/
+}
+.fa-exclamation-circle {
+  color: red;
+  /*font-size: 18px;*/
+}
+p {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.panel-body p {
+  font-size: 20px;
+}
 
 
 /* Footer styles
