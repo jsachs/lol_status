@@ -31,116 +31,48 @@
 			<h1>League of Legends Server Status</h1>
 		</div>
 
-			<ul class="nav nav-pills nav-stacked col-md-2 well well-sm">
-				<input type="hidden" id="selected_menu_item" value="=$selectedMenuId; ?>"/>
-				<li ng-repeat="shard in shards">
-					<a href="#{{shard.slug}}" data-toggle="tab">{{shard.name}}</a>
-				</li>
-			</ul>
+		<ul class="nav nav-pills nav-stacked col-md-2 well well-sm">
+			<li ng-repeat="shard in shards" ng-class="{active: $index == 0}">
+				<a href="#{{shard.slug}}" data-toggle="tab">{{shard.name}}</a>
+			</li>
+		</ul>
 
-			<div class="tab-content col-md-5">
-				<div class="tab-pane" ng-repeat="shard in shards" id="{{shard.slug}}">
-					<div class="panel-heading">
-						<h3>{{shard.name}}</h3>
-					</div>
-					<div class="panel-body">
-						<p><i ng-class="regions[shard.slug].services.1.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Game</p>
-						<p><i ng-class="regions[shard.slug].services.0.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Forums</p>
-						<p><i ng-class="regions[shard.slug].services.2.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Store</p>
-					</div>
+		<div class="tab-content col-md-10">
+			<div class="tab-pane" ng-repeat="shard in shards" id="{{shard.slug}}" ng-class="{active: $index == 0}">
+				<div class="panel-heading">
+					<h3>{{shard.name}}</h3>
 				</div>
+				<div class="panel-body">
+					<p><i ng-class="regions[shard.slug].services.1.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Game</p>
+					<p><i ng-class="regions[shard.slug].services.0.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Forums</p>
+					<p><i ng-class="regions[shard.slug].services.2.status == 'online' ? 'fa fa-check fa-fw' : 'fa fa-exclamation-circle fa-fw'"></i> Store</p>
+				</div>
+				<form ng-controller="contactController" ng-submit="submit(contactform)" name="contactform" method="post" action="" class="form-inline" role="form">
+					<div class="form-group" ng-class="{ 'has-error': contactform.inputEmail.$invalid && submitted }">
+						<input ng-model="formData.inputEmail" type="email" class="form-control" placeholder="Your Email" required>
+					</div>
+					<div class="form-group" style="display: none;">
+						<input ng-init="formData.inputRegion=shard.slug" class="form-control"></input>
+					</div>
+					<button type="submit" class="btn btn-default" ng-disabled="submitButtonDisabled">
+						{{ submitted == false ? 'Sign up for alerts.' : 'Thank you!' }}
+					</button>
+				</form>
 			</div>
-
-	<div class="github-fork-ribbon-wrapper right-bottom">
-		<div class="github-fork-ribbon" style="background-color: #090;">
-			<a href="https://github.com/jsachs/lol_status">Fork me on GitHub</a>
 		</div>
-	</div>
 
-	<div id="footer">
-		<div class="container">
+		<div class="github-fork-ribbon-wrapper right">
+			<div class="github-fork-ribbon" style="background-color: #090;">
+				<a href="https://github.com/jsachs/lol_status">Fork me on GitHub</a>
+			</div>
+		</div>
+
+		<footer class="footer">
 			<p>© Jacob Sachs | Licensed under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a><p>
 			<p>LoL Status isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</p>
-		</div>
-	</div>
+		</footer>
 
-</div>
+	</div>
 
 </body>
 </html>
-
-
-
-<!--
-<link class="cssdeck" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" class="cssdeck">
-
-<div class="" id="loginModal">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3>Have an Account?</h3>
-	</div>
-	<div class="modal-body">
-		<div class="well">
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-				<li><a href="#create" data-toggle="tab">Create Account</a></li>
-			</ul>
-			<div id="myTabContent" class="tab-content">
-				<div class="tab-pane active in" id="login">
-					<form class="form-horizontal" action='' method="POST">
-						<fieldset>
-							<div id="legend">
-								<legend class="">Login</legend>
-							</div>
-							<div class="control-group">
-								< Username -->
-								<!-- <label class="control-label"  for="username">Username</label>
-								<div class="controls">
-									<input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-								</div>
-							</div>
-
-							<div class="control-group">
-								< Password-->
-								<!-- <label class="control-label" for="password">Password</label>
-								<div class="controls">
-									<input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-								</div>
-							</div>
-
-
-							<div class="control-group"> -->
-								<!-- Button -->
-								<!-- <div class="controls">
-									<button class="btn btn-success">Login</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-				<div class="tab-pane fade" id="create">
-					<form id="tab">
-						<label>Username</label>
-						<input type="text" value="" class="input-xlarge">
-						<label>First Name</label>
-						<input type="text" value="" class="input-xlarge">
-						<label>Last Name</label>
-						<input type="text" value="" class="input-xlarge">
-						<label>Email</label>
-						<input type="text" value="" class="input-xlarge">
-						<label>Address</label>
-						<textarea value="Smith" rows="3" class="input-xlarge">
-						</textarea>
-
-						<div>
-							<button class="btn btn-primary">Create Account</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> -->

@@ -23,37 +23,15 @@ p {
 /* Footer styles
 -------------------------------------------------- */
 
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
-}
-#footer {
-  background-color: #375A7F;
-}
-#footer {
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  height:80px;
-  width:100%;
-  font-size: 12px;
-}
-#footer p {
-  margin-top: 0.3em;
+.footer {
+  position: relative;
+  height: 150px;
+  clear: both;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(238, 238, 238);
 }
