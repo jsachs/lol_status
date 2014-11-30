@@ -36,7 +36,7 @@ describe('routes', function() {
       request(url)
       .post('/signup')
       .send({inputEmail:  'jacob@jacob.com',
-      inputRegion: {name: 'na'}})
+             inputRegion: 'na'})
       .end(function(e,res) {
         should.not.exist(e);
         should.exist(res.body);
