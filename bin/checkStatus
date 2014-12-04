@@ -21,6 +21,7 @@ var User   = require('../app/models/user');
 
 // heroku scheduled task =======================================================
 function task() {
+  console.log("Running checkStatus");
   var regions = ['na','euw','eune','lan','las','br','tr','ru','oce'];
   var newStatus;
 
@@ -60,4 +61,4 @@ function sendEmailAlert(reg, newState){
 
 // run the task and exit =======================================================
 task();
-process.exit();
+setTimeout(function(){process.exit()},5000);
