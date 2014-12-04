@@ -1,4 +1,4 @@
-#! /app/bin/node
+#!/usr/bin/env node
 
 // set up ======================================================================
 var express  = require('express');
@@ -60,4 +60,4 @@ function sendEmailAlert(reg, newState){
 
 // run the task and exit =======================================================
 task();
-exit();
+process.exit();
