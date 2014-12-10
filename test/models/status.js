@@ -54,6 +54,13 @@ describe('app: models: status', function() {
       });
     });
 
+    it('returns an error when a status document cannot be found', function(done) {
+      Status.statusChange(null, null, function(err, reg, status) {
+        should.exist(err);
+        done();
+      });
+    });
+
   });
 
 });
