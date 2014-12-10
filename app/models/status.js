@@ -7,14 +7,16 @@ var statusSchema = mongoose.Schema({
 
 
 // executes the callback if game server status has changed for a region
-statusSchema.statics.statusChange = function(reg, newStatus, cb) {
-  var Status = this || mongoos.model('Status');
+statusSchema.statics.statusChange = function(reg, newStatus, fn) {
+  var Status = this || mongoose.model('Status');
   Status.findOne({region: reg}, function(err, status) {
+    if (err) {
+      return fn(new Error(err));
+    }
     if (status) {
       if (status.gameStatus == newStatus) return;
       status.update({gameStatus: newStatus}).exec();
-      cb(reg, newStatus);
-      return;
+      return fn(null, reg, newStatus);
     }
     // if there is no current status, create the status and return false
     Status.create({
@@ -22,9 +24,8 @@ statusSchema.statics.statusChange = function(reg, newStatus, cb) {
       gameStatus : newStatus,
     }, function(err, status) {
       if (err) {
-        console.log('error creating Status: ' + err);
+        return fn(new Error('error creating status: ' + err));
       }
-      console.log('initializing status for region: ' + reg);
     });
   });
 };

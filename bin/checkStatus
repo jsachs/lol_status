@@ -22,7 +22,7 @@ var User   = require('../app/models/user');
 // heroku scheduled task =======================================================
 function task() {
   console.log("Running checkStatus");
-  var regions = ['na','euw','eune','lan','las','br','tr','ru','oce'];
+  var regions = ['na','euw','eune','lan','las','br','tr','ru','oce'];  // TODO get these with the API
   var newStatus;
 
   // get each region's game status
@@ -33,26 +33,29 @@ function task() {
       // if the game status has changed:
       //  - update the status (done in Model method)
       //  - send an email alert
-      Status.statusChange(region, newStatus, sendEmailAlert);
+      Status.statusChange(region, newStatus, sendStatusAlert);
     });
   });
 };
 
 
 // send alert emails if there is a status change ===============================
-function sendEmailAlert(reg, newState){
+exports.sendStatusAlert = function(error, reg, newState){
+  if (error) {
+    console.log(error);
+    return;
+  }
   User.find({ region: reg }, function(err, docs) {
-    console.log("Emailing users: " + docs);
     docs.forEach(function(user) {
       var locals = {
         email: user.email,
         subject: user.region + " is " + newState,
         region: user.region,
         status: newState,
-        unsubscribeUrl: '/unsubscribe/' + user._id         // TODO is this secure to send the ID raw?
+        unsubscribeUrl: '/unsubscribe/' + user._id  // TODO is this secure to send the ID raw?
       };
-      mailer.sendOne('alert', locals, function(error) {
-        console.log(error);
+      mailer.sendOne('status', locals, function(error) {
+        if (error) console.log(error);
       });
     });
   });

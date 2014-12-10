@@ -1,6 +1,7 @@
-var User = require('./models/user');
-var path = require('path');
-var index = path.resolve(__dirname, '..', 'public/index.html');
+var User   = require('./models/user');
+var mailer = require('./models/mailer');
+var path   = require('path');
+var index  = path.resolve(__dirname, '..', 'public/index.html');
 
 module.exports = function(app) {
 
@@ -16,6 +17,7 @@ module.exports = function(app) {
       }
       console.log('signing up user: ' + user);
       res.send(user);
+      sendSignupAlert(req.body.inputEmail, req.body.inputRegion, user._id);
     });
   });
 
@@ -28,6 +30,7 @@ module.exports = function(app) {
         return err;
       }
       res.send((result===1)?{msg:'success'}:{msg:'error'})
+      sendUnsubscribeAlert(req.body.inputEmail, req.body.inputRegion);
     });
   });
 
@@ -36,4 +39,29 @@ module.exports = function(app) {
     res.sendFile(index); // load the single view file (angular will handle the page changes on the front-end)
   });
 
+};
+
+
+function sendSignupAlert(inputEmail, inputRegion, userID){
+  var locals = {
+    email: inputEmail,
+    subject: "Subscribed to alerts for " + inputRegion,
+    region: inputRegion,
+    unsubscribeUrl: '/unsubscribe/' + userID  // TODO is this secure to send the ID raw?
+  };
+  mailer.sendOne('signup', locals, function(error) {
+    console.log(error);
+  });
+};
+
+
+function sendUnsubscribeAlert(inputEmail, inputRegion){
+  var locals = {
+    email: inputEmail,
+    subject: "Subscribed to alerts for " + inputRegion,
+    region: inputRegion,
+  };
+  mailer.sendOne('unsubscribe', locals, function(error) {
+    console.log(error);
+  });
 };
