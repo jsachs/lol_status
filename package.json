@@ -1,6 +1,6 @@
 {
   "name"         : "lol_status",
-  "version"      : "0.0.3",
+  "version"      : "0.0.5",
   "description"  : "League of Legends server status dashboard",
   "main"         : "server.js",
   "author"       : "Jacob Sachs",
@@ -11,10 +11,9 @@
     "body-parser": "~1.5.2",
     "method-override": "~2.1.2",
     "nodemailer": "~1.0.0",
-    "cron": "~1.0.0",
     "node-rest-client": "~1.0.0",
     "email-templates": "~1.1.2",
-    "ejs": "*"
+    "ejs": "~1.0.0"
   },
   "devDependencies": {
     "mocha": ">= 2.0.0",

@@ -13,8 +13,7 @@ statusSchema.statics.statusChange = function(reg, newStatus, cb) {
     if (status) {
       if (status.gameStatus == newStatus) return;
       status.update({gameStatus: newStatus}).exec();
-      cb(reg, newStatus);
-      return;
+      return cb(reg, newStatus);
     }
     // if there is no current status, create the status and return false
     Status.create({
@@ -24,7 +23,6 @@ statusSchema.statics.statusChange = function(reg, newStatus, cb) {
       if (err) {
         console.log('error creating Status: ' + err);
       }
-      console.log('initializing status for region: ' + reg);
     });
   });
 };

@@ -4,8 +4,8 @@ module.exports = {
 	},
 	mailer: {
 		auth: {
-				user: process.env.EMAIL_USER,
-				pass: process.env.EMAIL_PASSWORD
+				user: process.env.MANDRILL_USERNAME,
+				pass: process.env.MANDRILL_APIKEY
 		}
 	}
 };
