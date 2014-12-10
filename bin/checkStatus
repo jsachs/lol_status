@@ -40,7 +40,11 @@ function task() {
 
 
 // send alert emails if there is a status change ===============================
-exports.sendStatusAlert = function sendStatusAlert(reg, newState){
+exports.sendStatusAlert = function(error, reg, newState){
+  if (error) {
+    console.log(error);
+    return;
+  }
   User.find({ region: reg }, function(err, docs) {
     docs.forEach(function(user) {
       var locals = {
@@ -50,7 +54,7 @@ exports.sendStatusAlert = function sendStatusAlert(reg, newState){
         status: newState,
         unsubscribeUrl: '/unsubscribe/' + user._id  // TODO is this secure to send the ID raw?
       };
-      mailer.sendOne('status', locals, function(error, status, html, text) {
+      mailer.sendOne('status', locals, function(error) {
         if (error) console.log(error);
       });
     });

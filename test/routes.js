@@ -7,7 +7,7 @@ var User = require('../app/models/user');
 var url = 'http://localhost:5000'
 
 
-describe('routes', function() {
+describe('app: routes', function() {
 
   before(function(done) {
     mongoose.connect('mongodb://localhost:27017/lol_status');

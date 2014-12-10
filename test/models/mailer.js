@@ -3,7 +3,7 @@
 var should = require('should');
 var mailer = require('../../app/models/mailer');
 
-describe('models: mailer', function () {
+describe('app: models: mailer', function () {
 
  describe('#sendOne', function () {
 
