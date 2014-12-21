@@ -3,7 +3,7 @@ var path = require('path');
 var templatesDir = path.resolve(__dirname, '../..', 'views/mailer');
 var emailTemplates = require('email-templates');
 
-var sendgrid = require('sendgrid')(mail.auth.user, mail.auth.pass);
+var sendgrid = require('sendgrid')(config.mail.auth.user, config.mail.auth.pass);
 
 module.exports.EmailAddressRequiredError = new Error('email address required');
 module.exports.SubjectRequiredError = new Error('subject required');

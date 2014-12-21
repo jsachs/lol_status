@@ -12,8 +12,8 @@ var methodOverride = require('method-override');      // simulate DELETE and PUT
 
 
 // configuration ===============================================================
-var database = require('./config');
-mongoose.connect(database.db.url);
+var config = require('./config');
+mongoose.connect(config.db.url);
 
 app.use(express.static(__dirname + '/public')); 				        // set the static files location /public/img will be /img for users
 app.use(morgan('dev')); 										                    // log every request to the console
