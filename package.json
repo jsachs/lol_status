@@ -10,7 +10,7 @@
     "morgan"	   : "~1.2.2",
     "body-parser": "~1.5.2",
     "method-override": "~2.1.2",
-    "nodemailer": "~1.0.0",
+    "sendgrid": "1.4.0",
     "node-rest-client": "~1.0.0",
     "email-templates": "~1.1.2",
     "ejs": "~1.0.0"

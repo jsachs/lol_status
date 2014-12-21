@@ -10,6 +10,6 @@
   "addons": [
     "scheduler:standard",
     "mongolab:sandbox",
-    "mandrill:starter"
+    "sendgrid:starter"
   ]
 }
