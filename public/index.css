@@ -40,57 +40,53 @@ p {
 /* Sidebar
 -------------------------------------------------- */
 
-body {
-  padding-top: 51px;
-}
-.text-center {
-  padding-top: 20px;
-}
-.col-xs-12 {
-  background-color: #fff;
-}
-#sidebar {
-  height: 100%;
-  padding-right: 0;
-  padding-top: 20px;
-}
-#sidebar .nav {
-  width: 95%;
-}
-#sidebar li {
-  border:0 #f2f2f2 solid;
-  border-bottom-width:1px;
+/* hide the horizontal scrollbar */
+html {
+  overflow-x: hidden;
 }
 
-/* collapsed sidebar styles */
+/* make all parent containers 100% height */
+html, body, .wrapper {
+  height: 100%;
+}
+
+/* move the toggle button to the left and give it
+some breathing room */
+.navbar-toggle {
+  float: left;
+  margin-left: 10px;
+}
+
 @media screen and (max-width: 767px) {
+
+  /* outer div */
   .row-offcanvas {
     position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-  .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -41.6%;
+    left: 0;
+    -webkit-transition: left .3s ease-in;
+    -most-transition: left .3s ease-in;
+    transition: left .3s ease-in;
   }
 
-  .row-offcanvas-left
+  /* sidebar */
   .sidebar-offcanvas {
-    left: -41.6%;
-  }
-  .row-offcanvas-right.active {
-    right: 41.6%;
-  }
-  .row-offcanvas-left.active {
-    left: 41.6%;
-  }
-  .sidebar-offcanvas {
+    left: -50%;
+    width: 50%;
     position: absolute;
     top: 0;
-    width: 41.6%;
+    height: 100%;
+    background-color: #F7F7F7;
+    padding: 0px;
   }
-  #sidebar {
-    padding-top:0;
+
+  /* content */
+  .row-offcanvas.active {
+    left: 50%;
+  }
+
+  /* Make the menu headers the same size as the
+  bootstrap navbar */
+  [data-role='panelbar'] .k-header {
+    min-height: 50px;
   }
 }
