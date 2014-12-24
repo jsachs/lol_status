@@ -29,6 +29,7 @@ module.exports = function(app) {
         console.log(err);
         return err;
       }
+      console.log('deleting user ' + req.params.user_id)
       res.send((result===1)?{msg:'success'}:{msg:'error'})
       sendUnsubscribeAlert(req.body.inputEmail, req.body.inputRegion);
     });
