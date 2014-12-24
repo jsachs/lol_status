@@ -10,30 +10,34 @@
   color: red;
   /*font-size: 18px;*/
 }
-p {
-  margin-top: 0em;
-  margin-bottom: 0em;
-}
-
 .panel-body p {
   font-size: 20px;
+  margin-top: 0em;
+  margin-bottom: 0em;
 }
 
 
 /* Footer
 -------------------------------------------------- */
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+}
 .footer {
-  /*position: relative;*/
-  height: 150px;
-  clear: both;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  /*margin-top: 40px;*/
-  border-top: 1px solid #eee;
-  /*border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: rgb(238, 238, 238);*/
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  /*background-color: #f5f5f5;*/
+}
+.container .text-muted {
+  margin: 20px 0px;
 }
 
 
@@ -46,7 +50,7 @@ html {
 }
 
 /* make all parent containers 100% height */
-html, body, .wrapper {
+body, .wrapper {
   height: 100%;
 }
 
