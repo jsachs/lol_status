@@ -7,6 +7,7 @@ var statusSchema = mongoose.Schema({
 
 // TODO have this better designed alongside new documentation
 // executes the callback if game server status has changed for a region
+// this callback is intended to be an email delivery function
 statusSchema.statics.statusChange = function(reg, newStatus, fn) {
   var Status = this || mongoose.model('Status');
   Status.findOne({region: reg}, function(err, status) {
@@ -15,8 +16,8 @@ statusSchema.statics.statusChange = function(reg, newStatus, fn) {
       return err;
     }
     if (status) {
-      if (status.gameStatus == newStatus) return;
-      status.update({gameStatus: newStatus}).exec();
+      if (status.gameStatus == newStatus) return;    // if there is no change in status, do nothing
+      status.update({gameStatus: newStatus}).exec(); // otherwise, update the status and execute the provided callback
       return fn(null, reg, newStatus);
     }
     // if there is no current status, create the status
