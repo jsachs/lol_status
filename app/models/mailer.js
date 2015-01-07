@@ -33,7 +33,7 @@ exports.sendOne = function (templateName, locals, fn) {
       }
       var email = new sendgrid.Email();
       email.addTo(locals.email);
-      email.setFrom('jacob.s.sachs@gmail.com');
+      email.setFrom('noreply@vast-escarpment-2018.herokuapp.com');  // TODO make this work with any sender
       email.setSubject(locals.subject);
       email.setText(text);
       email.setHtml(html);

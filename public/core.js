@@ -40,7 +40,6 @@ lolStatus.controller('contactController', function ($scope, $http) {
     $scope.submitted = false; //used so that form errors are shown only after the form has been submitted
 
     $scope.submit = function(contactform) {
-        console.log($scope);
         $scope.submitted = true;
         $scope.submitButtonDisabled = true;
         if (contactform.$valid) {
