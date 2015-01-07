@@ -1,6 +1,6 @@
 {
   "name"         : "lol_status",
-  "version"      : "0.0.5",
+  "version"      : "0.1.0",
   "description"  : "League of Legends server status dashboard",
   "main"         : "server.js",
   "author"       : "Jacob Sachs",
