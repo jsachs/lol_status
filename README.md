@@ -16,10 +16,15 @@ Users can subscribe to emails that will alerts subscribers when the game server 
 # install node.js and mongodb
 
 # run a local version of mongo
+sudo mongod
 
 # run the server
+node server.js
 
 # you can access the page at localhost:5000
+
+# with the server running, you can run the tests
+npm test
 ```
 
 Alternatively, you can use the nifty button below to deploy your own version of the app to Heroku.
@@ -45,5 +50,8 @@ The front end is written in [Angular](https://angularjs.org/). It uses one contr
 
 ## Add-ons
 ### Sendgrid
+Emails are delivered using the [Sendgrid NodeJS module](https://github.com/sendgrid/sendgrid-nodejs). This requires setting up a Sendgrid account, most easily accomplished with the Heroku add-on.
 ### Heroku scheduler
+The app checks the status of the LoL servers, and takes any required action, through use of the Heroku scheduler add-on. Once added, the checkStatus script (located in the bin directory) is configured to run at a regular interval.
 ### Mongolab
+MongoDB backend of choice for Heroku. Used here because of the easy-to-use free plan, but any Mongo backend will do.
